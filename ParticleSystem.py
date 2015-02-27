@@ -5,11 +5,14 @@ import Rhino
 
 
 def main():
+    #boxs = rs.ObjectsByName("box")
+    min = rs.ObjectsByName("min")
+    max = rs.ObjectsByName("max")
     
-    box = rs.GetBox(prompt1="select box")
+    #box = rs.GetBox(prompt1="select box")
     
-    minPoint = box[0]
-    maxPoint = box[6]
+    minPoint = rs.coerce3dpoint(min[0])
+    maxPoint = rs.coerce3dpoint(max[0])
     
     size = 5.0
     location = [0,0,0]
