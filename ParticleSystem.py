@@ -1,9 +1,7 @@
+
 import rhinoscriptsyntax as rs
 from Particle import Particle
-<<<<<<< HEAD
 from CurveMaker import CurveMaker
-=======
->>>>>>> parent of ac61eae... :100:
 import random
 import Rhino
 
@@ -23,13 +21,10 @@ def main():
     vel = [0,0,0]
     acc = [0,0,0]
     
-<<<<<<< HEAD
     
-=======
->>>>>>> parent of ac61eae... :100:
     particles = []
     boundingBox = Rhino.Geometry.BoundingBox(minPoint,maxPoint)
-    for i in range(0,1000):
+    for i in range(0,10):
         x = random.uniform(minPoint[0],maxPoint[0])
         y = random.uniform(minPoint[1],maxPoint[1])
         z = random.uniform(minPoint[2],maxPoint[2])
@@ -40,44 +35,21 @@ def main():
         tempParticle.setBoundingBox(boundingBox)
         particles.append(tempParticle)
     
-    for i in range(0,200):
-        if(i%48):
-            drawSphere(particles)
-        else:
-            loop(particles)
+    for i in range(0,10):
+        loop(particles)
     
-<<<<<<< HEAD
     print"finished"
 
 def loop(particles,):
     rs.EnableRedraw(False)
     drawPoints = []
     for particle in particles:
-=======
-    
-    print"finished"
-
-
-
-def loop(particles):
-    rs.EnableRedraw(False)
-    drawPoints = []
-    for particle in particles:
-        particle.update()
->>>>>>> parent of ac61eae... :100:
         tempPoint = particle.draw()
         if tempPoint:
             drawPoints.append(tempPoint)
     rs.EnableRedraw(True)
     rs.EnableRedraw(False)
     rs.DeleteObjects(drawPoints)
-
-
-def drawSphere(particles):
-    for particle in particles:
-        tempPoint = particle.draw()
-        if tempPoint:
-            rs.AddSphere(rs.coerce3dpoint(tempPoint),particle._size)
 
 if(__name__ == "__main__"):
     main()
