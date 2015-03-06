@@ -12,9 +12,11 @@ def main():
     
     box = rs.GetBox(prompt1="select box")
     
-    attrPointIn = rs.GetObject("select attractor",1)
-    point = rs.coerce3dpoint(attrPointIn)
-    attr = Attractor(point, 100, 50)
+    attrPointIn = rs.GetObjects("select attractors",1)
+    attrs = []
+    for a in attrPointIn:
+        point = rs.coerce3dpoint(a)
+        attrs.append(Attractor(point, -1, 50))
     
     minPoint = box[0]
     maxPoint = box[6]
@@ -38,7 +40,7 @@ def main():
         particles.append(tempParticle)
     
     for i in range(0,100):
-            loop(particles, attr)
+            loop(particles, attrs)
     
     
     for particle in particles:
@@ -52,7 +54,7 @@ def loop(particles, attractor):
     rs.EnableRedraw(False)
     drawPoints = []
     for particle in particles:
-        #applyRepel(particle,attractor)
+        applyRepel(particle,attractor)
         particle.update()
         tempPoint = particle.draw()
         if tempPoint:
@@ -62,9 +64,10 @@ def loop(particles, attractor):
     rs.DeleteObjects(drawPoints)
 
 
-def applyRepel(particle, attractor):
-    attrVector = attractor.attract(particle)
-    particle.applyForce(attrVector)
+def applyRepel(particle, attractors):
+    for attr in attractors:
+        attrVector = attr.attract(particle)
+        particle.applyForce(attrVector)
         
 
 def drawSphere(particles):
