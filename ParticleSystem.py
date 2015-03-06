@@ -2,11 +2,14 @@ import rhinoscriptsyntax as rs
 from Particle import Particle
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from Attractor import Attractor
 =======
 from Particle import Attractor
 
 >>>>>>> origin/master
+=======
+>>>>>>> parent of ac61eae... :100:
 =======
 >>>>>>> parent of ac61eae... :100:
 import random
@@ -37,10 +40,14 @@ def main():
     boundingBox = Rhino.Geometry.BoundingBox(minPoint,maxPoint)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     for i in range(0,10):
 =======
     for i in range(0,200):
 >>>>>>> origin/master
+=======
+    for i in range(0,1000):
+>>>>>>> parent of ac61eae... :100:
 =======
     for i in range(0,1000):
 >>>>>>> parent of ac61eae... :100:
@@ -54,6 +61,7 @@ def main():
         tempParticle.setBoundingBox(boundingBox)
         particles.append(tempParticle)
     
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     for i in range(0,10):
@@ -101,6 +109,23 @@ def loop(particles):
     drawPoints = []
     for particle in particles:
 >>>>>>> parent of ac61eae... :100:
+=======
+    for i in range(0,200):
+        if(i%48):
+            drawSphere(particles)
+        else:
+            loop(particles)
+    
+    
+    print"finished"
+
+
+
+def loop(particles):
+    rs.EnableRedraw(False)
+    drawPoints = []
+    for particle in particles:
+>>>>>>> parent of ac61eae... :100:
         particle.update()
         tempPoint = particle.draw()
         if tempPoint:
@@ -109,6 +134,7 @@ def loop(particles):
     rs.EnableRedraw(False)
     rs.DeleteObjects(drawPoints)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -120,6 +146,8 @@ def applyRepel(particle, attractors):
         
 =======
 >>>>>>> parent of ac61eae... :100:
+=======
+>>>>>>> parent of ac61eae... :100:
 
 def drawSphere(particles):
     for particle in particles:
@@ -128,7 +156,10 @@ def drawSphere(particles):
             rs.AddSphere(rs.coerce3dpoint(tempPoint),particle._size)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> parent of ac61eae... :100:
 =======
 >>>>>>> parent of ac61eae... :100:
 if(__name__ == "__main__"):
