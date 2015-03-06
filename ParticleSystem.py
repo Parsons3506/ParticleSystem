@@ -1,12 +1,14 @@
-
 import rhinoscriptsyntax as rs
 from Particle import Particle
+<<<<<<< HEAD
 <<<<<<< HEAD
 from Attractor import Attractor
 =======
 from Particle import Attractor
 
 >>>>>>> origin/master
+=======
+>>>>>>> parent of ac61eae... :100:
 import random
 import Rhino
 
@@ -31,17 +33,17 @@ def main():
     vel = [0,0,0]
     acc = [0,0,0]
     
-    attrPointIn = rs.GetObjects("select attractor", 1)
-    point = rs.coerce3dpoint(point, raise_on_error=false)
-    Attractor = Attractor(point,3,50)
-    
     particles = []
     boundingBox = Rhino.Geometry.BoundingBox(minPoint,maxPoint)
+<<<<<<< HEAD
 <<<<<<< HEAD
     for i in range(0,10):
 =======
     for i in range(0,200):
 >>>>>>> origin/master
+=======
+    for i in range(0,1000):
+>>>>>>> parent of ac61eae... :100:
         x = random.uniform(minPoint[0],maxPoint[0])
         y = random.uniform(minPoint[1],maxPoint[1])
         z = random.uniform(minPoint[2],maxPoint[2])
@@ -53,6 +55,7 @@ def main():
         particles.append(tempParticle)
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     for i in range(0,10):
         loop(particles)
 =======
@@ -63,14 +66,18 @@ def main():
     
     for particle in particles:
         particle.drawCurve()
+=======
+    for i in range(0,200):
+        if(i%48):
+            drawSphere(particles)
+        else:
+            loop(particles)
+>>>>>>> parent of ac61eae... :100:
+    
     
     print"finished"
-    
-def applyAttractor(particles, Attractor):
-    for particle in particles:
-        
-    
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 def loop(particles, Attractor):
     rs.EnableRedraw(False)
@@ -86,6 +93,14 @@ def loop(particles, attractor):
     for particle in particles:
         applyRepel(particle,attractor)
 >>>>>>> origin/master
+=======
+
+
+def loop(particles):
+    rs.EnableRedraw(False)
+    drawPoints = []
+    for particle in particles:
+>>>>>>> parent of ac61eae... :100:
         particle.update()
         tempPoint = particle.draw()
         if tempPoint:
@@ -95,6 +110,7 @@ def loop(particles, attractor):
     rs.DeleteObjects(drawPoints)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 def applyRepel(particle, attractors):
@@ -102,6 +118,8 @@ def applyRepel(particle, attractors):
         attrVector = attr.attract(particle)
         particle.applyForce(attrVector)
         
+=======
+>>>>>>> parent of ac61eae... :100:
 
 def drawSphere(particles):
     for particle in particles:
@@ -109,7 +127,10 @@ def drawSphere(particles):
         if tempPoint:
             rs.AddSphere(rs.coerce3dpoint(tempPoint),particle._size)
 
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> parent of ac61eae... :100:
 if(__name__ == "__main__"):
     main()
 
