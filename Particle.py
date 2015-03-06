@@ -11,6 +11,7 @@ class Particle:
         self._acc = acc
         self._bBox = None
         self._alive = True
+        self._history = []
     
     def applyForce(self,force):
         newForce = rs.VectorDivide(force,self._size)
@@ -25,8 +26,13 @@ class Particle:
         if(self._bBox and not self._bBox.Contains(Rhino.Geometry.Point3d(self._loc))):
             self._alive = False
     
+    def drawCurve(self):
+        if(len(self._history)>2):
+            rs.AddCurve(self._history)
+    
     def draw(self):
         if(self._alive):
+            self._history.append(self._loc)
             return rs.AddPoint(self._loc)
         else:
             return False

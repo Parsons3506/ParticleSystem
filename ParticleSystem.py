@@ -41,6 +41,9 @@ def main():
             loop(particles, attr)
     
     
+    for particle in particles:
+        particle.drawCurve()
+    
     print"finished"
 
 
@@ -49,7 +52,7 @@ def loop(particles, attractor):
     rs.EnableRedraw(False)
     drawPoints = []
     for particle in particles:
-        applyRepel(particle,attractor)
+        #applyRepel(particle,attractor)
         particle.update()
         tempPoint = particle.draw()
         if tempPoint:
