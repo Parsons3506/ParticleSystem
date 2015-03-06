@@ -1,17 +1,7 @@
 import rhinoscriptsyntax as rs
 from Particle import Particle
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-from Attractor import Attractor
-=======
 from Particle import Attractor
-
->>>>>>> origin/master
-=======
->>>>>>> parent of ac61eae... :100:
-=======
->>>>>>> parent of ac61eae... :100:
+from curveMaker import CurveMaker
 import random
 import Rhino
 
@@ -26,7 +16,7 @@ def main():
     attrs = []
     for a in attrPointIn:
         point = rs.coerce3dpoint(a)
-        attrs.append(Attractor(point, -1, 50))
+        attrs.append(Attractor(point, -2, 10))
     
     minPoint = box[0]
     maxPoint = box[6]
@@ -38,61 +28,36 @@ def main():
     
     particles = []
     boundingBox = Rhino.Geometry.BoundingBox(minPoint,maxPoint)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for i in range(0,10):
-=======
-    for i in range(0,200):
->>>>>>> origin/master
-=======
-    for i in range(0,1000):
->>>>>>> parent of ac61eae... :100:
-=======
-    for i in range(0,1000):
->>>>>>> parent of ac61eae... :100:
+    for i in range(0,500):
         x = random.uniform(minPoint[0],maxPoint[0])
         y = random.uniform(minPoint[1],maxPoint[1])
-        z = random.uniform(minPoint[2],maxPoint[2])
+        z = random.uniform(maxPoint[2],maxPoint[2])
         
-        acc = random.uniform(-.01,-0.2)
-        size = random.uniform(.008,0.4)
+        acc = random.uniform(-.01,-0.5)
+        #size = random.uniform(.008,0.9)
         tempParticle = Particle(size, [x,y,z], vel, [0,0,acc])
         tempParticle.setBoundingBox(boundingBox)
         particles.append(tempParticle)
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for i in range(0,10):
-        loop(particles)
-=======
     for i in range(0,100):
             loop(particles, attrs)
     
->>>>>>> origin/master
-    
+    curves = [] 
     for particle in particles:
-        particle.drawCurve()
-=======
-    for i in range(0,200):
-        if(i%48):
-            drawSphere(particles)
-        else:
-            loop(particles)
->>>>>>> parent of ac61eae... :100:
+        curve = particle.drawCurve()
+        if curve !=0 :
+            curves.append(curve)
+    
+    for curve in curves:
+        idx = random.randint(0,len(curves)-1)
+        curve2 = curves[idx]
+        #if(curve != curve2):
+            #curveMaker = CurveMaker (curve, curve2, 20)
+            #curveMaker.drawLinesBetweenCurves()
     
     
     print"finished"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-def loop(particles, Attractor):
-    rs.EnableRedraw(False)
-    drawPoints = []
-    for particle in particles:
-        applyRepel(particle,Attractor)
-=======
 
 
 def loop(particles, attractor):
@@ -100,32 +65,6 @@ def loop(particles, attractor):
     drawPoints = []
     for particle in particles:
         applyRepel(particle,attractor)
->>>>>>> origin/master
-=======
-
-
-def loop(particles):
-    rs.EnableRedraw(False)
-    drawPoints = []
-    for particle in particles:
->>>>>>> parent of ac61eae... :100:
-=======
-    for i in range(0,200):
-        if(i%48):
-            drawSphere(particles)
-        else:
-            loop(particles)
-    
-    
-    print"finished"
-
-
-
-def loop(particles):
-    rs.EnableRedraw(False)
-    drawPoints = []
-    for particle in particles:
->>>>>>> parent of ac61eae... :100:
         particle.update()
         tempPoint = particle.draw()
         if tempPoint:
@@ -134,20 +73,13 @@ def loop(particles):
     rs.EnableRedraw(False)
     rs.DeleteObjects(drawPoints)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 def applyRepel(particle, attractors):
     for attr in attractors:
         attrVector = attr.attract(particle)
-        particle.applyForce(attrVector)
+        if attrVector:
+            particle.applyForce(attrVector)
         
-=======
->>>>>>> parent of ac61eae... :100:
-=======
->>>>>>> parent of ac61eae... :100:
 
 def drawSphere(particles):
     for particle in particles:
@@ -155,13 +87,6 @@ def drawSphere(particles):
         if tempPoint:
             rs.AddSphere(rs.coerce3dpoint(tempPoint),particle._size)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> parent of ac61eae... :100:
-=======
->>>>>>> parent of ac61eae... :100:
 if(__name__ == "__main__"):
     main()
 

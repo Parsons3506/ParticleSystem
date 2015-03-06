@@ -28,7 +28,9 @@ class Particle:
     
     def drawCurve(self):
         if(len(self._history)>2):
-            rs.AddCurve(self._history)
+            return rs.AddCurve(self._history)
+        else:
+            return 0
     
     def draw(self):
         if(self._alive):
@@ -48,10 +50,9 @@ class Attractor:
     def attract(self, particle):
         dir = rs.VectorCreate(self._loc,particle._loc)
         mag = rs.VectorLength(dir)
-        if(mag > self._rad):
-            mag = self._rad
-        dir = rs.VectorUnitize(dir)
+        if(mag < self._rad):
+            dir = rs.VectorUnitize(dir)
+            force = self._force * (1-(mag/self._rad))
+            return rs.VectorScale(dir,force)
         
-        force = self._force * (mag/self._rad)
-        return rs.VectorScale(dir,force)
         
