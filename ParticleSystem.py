@@ -21,18 +21,18 @@ def main():
     
     particles = []
     boundingBox = Rhino.Geometry.BoundingBox(minPoint,maxPoint)
-    for i in range(0,1000):
+    for i in range(0,500):
         x = random.uniform(minPoint[0],maxPoint[0])
         y = random.uniform(minPoint[1],maxPoint[1])
         z = random.uniform(minPoint[2],maxPoint[2])
         
-        acc = random.uniform(-.01,-.5)
-        size = random.uniform(.1,2)
+        acc = random.uniform(-.01,-0.2)
+        size = random.uniform(.008,0.4)
         tempParticle = Particle(size, [x,y,z], vel, [0,0,acc])
         tempParticle.setBoundingBox(boundingBox)
         particles.append(tempParticle)
     
-    for i in range(0,200):
+    for i in range(0,50):
         if(i%48):
             drawSphere(particles)
         else:
