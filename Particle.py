@@ -26,10 +26,3 @@ class Particle:
             return rs.AddPoint(self._loc)
         else:
             return False
-            
-            
-class attractor:
-    
-    def __init__(location, force):
-        self._loc = location
-        self._force = force
